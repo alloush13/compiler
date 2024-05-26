@@ -17,14 +17,8 @@ public class sourceElements {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        if (sourceElement!=null) {
-            for (int i = 0; i < sourceElement.size(); i++)
-            {
-                stringBuilder.append(ASTStringBuilder.printElement(2,"sourceElement",sourceElement.get(i).toString()));
+        StringBuilder stringBuilder = ASTStringBuilder.buildElement(2,"sourceElement",sourceElement);
 
-            }
-        }
 
         return stringBuilder.toString();
     }

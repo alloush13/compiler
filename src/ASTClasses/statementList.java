@@ -17,13 +17,7 @@ public class statementList {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        if (this.statement!=null) {
-            for (int i = 0; i < this.statement.size(); i++)
-            {
-                stringBuilder.append(ASTStringBuilder.printElement(6,"statement",this.statement.get(i).toString()));
-            }
-        }
+        StringBuilder stringBuilder = ASTStringBuilder.buildElement(6,"statement",this.statement);
 
         return stringBuilder.toString();
     }

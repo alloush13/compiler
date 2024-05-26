@@ -30,10 +30,8 @@ public class statement {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        if (block!=null) {
-            stringBuilder.append(ASTStringBuilder.printElement(4,"block",block.toString()));
-        }
+        StringBuilder stringBuilder =ASTStringBuilder.buildElement(4,"block",block);
+
 
         return stringBuilder.toString();
     }

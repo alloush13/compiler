@@ -13,8 +13,8 @@ public class block {
     }
 
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(ASTStringBuilder.printElement(5,"statementList",statementList.toString()));
+        StringBuilder stringBuilder = ASTStringBuilder.buildElement(5,"statementList",statementList);
+
         return stringBuilder.toString();
     }
 }

@@ -17,9 +17,8 @@ public class program {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("program : \n");
-        stringBuilder.append(ASTStringBuilder.printElement(1,"sourceElements",sourceElements.toString()));
+        StringBuilder stringBuilder = ASTStringBuilder.buildElement(1,"sourceElements",sourceElements);
+        stringBuilder.insert(0,"program :\n");
 
         return stringBuilder.toString();
     }

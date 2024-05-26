@@ -16,8 +16,8 @@ public class sourceElement {
 
 
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(ASTStringBuilder.printElement(3,"statement",statement.toString()));
+        StringBuilder stringBuilder = ASTStringBuilder.buildElement(3,"statement",statement);
+
         return stringBuilder.toString();
     }
     public String toHtml() {
