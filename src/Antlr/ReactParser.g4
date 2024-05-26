@@ -25,20 +25,16 @@ statement
     | functionDeclaration
     ;
 
-block
-    : OpenBrace statementList? CloseBrace
-    ;
+block: OpenBrace statementList? CloseBrace;
 
 statementList
     : statement+
     ;
 
-importStatement
-    : Import importFromBlock
-    ;
+importStatement : Import importFromBlock ;
 
 importFromBlock
-    : importDefault? (importNamespace | moduleItems) importFrom eos
+    : ((aliasName)|( aliasName ',' moduleItems)| (moduleItems))importFrom eos
     | StringLiteral eos
     ;
 
@@ -46,9 +42,6 @@ moduleItems
     : OpenBrace (aliasName ',')* (aliasName ','?)? CloseBrace
     ;
 
-importDefault
-    : aliasName ','
-    ;
 
 importNamespace
     : ('*' | identifierName) (As identifierName)?
