@@ -88,16 +88,6 @@ public interface ReactParserListener extends ParseTreeListener {
 	 */
 	void exitModuleItems(ReactParser.ModuleItemsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ReactParser#importDefault}.
-	 * @param ctx the parse tree
-	 */
-	void enterImportDefault(ReactParser.ImportDefaultContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#importDefault}.
-	 * @param ctx the parse tree
-	 */
-	void exitImportDefault(ReactParser.ImportDefaultContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ReactParser#importNamespace}.
 	 * @param ctx the parse tree
 	 */
@@ -275,56 +265,6 @@ public interface ReactParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWithStatement(ReactParser.WithStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#switchStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterSwitchStatement(ReactParser.SwitchStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#switchStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitSwitchStatement(ReactParser.SwitchStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#caseBlock}.
-	 * @param ctx the parse tree
-	 */
-	void enterCaseBlock(ReactParser.CaseBlockContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#caseBlock}.
-	 * @param ctx the parse tree
-	 */
-	void exitCaseBlock(ReactParser.CaseBlockContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#caseClauses}.
-	 * @param ctx the parse tree
-	 */
-	void enterCaseClauses(ReactParser.CaseClausesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#caseClauses}.
-	 * @param ctx the parse tree
-	 */
-	void exitCaseClauses(ReactParser.CaseClausesContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#caseClause}.
-	 * @param ctx the parse tree
-	 */
-	void enterCaseClause(ReactParser.CaseClauseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#caseClause}.
-	 * @param ctx the parse tree
-	 */
-	void exitCaseClause(ReactParser.CaseClauseContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#defaultClause}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefaultClause(ReactParser.DefaultClauseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#defaultClause}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefaultClause(ReactParser.DefaultClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#labelledStatement}.
 	 * @param ctx the parse tree
@@ -1077,46 +1017,6 @@ public interface ReactParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTemplateStringAtom(ReactParser.TemplateStringAtomContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#identifierName}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifierName(ReactParser.IdentifierNameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#identifierName}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifierName(ReactParser.IdentifierNameContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#identifier}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifier(ReactParser.IdentifierContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#identifier}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifier(ReactParser.IdentifierContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#reservedWord}.
-	 * @param ctx the parse tree
-	 */
-	void enterReservedWord(ReactParser.ReservedWordContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#reservedWord}.
-	 * @param ctx the parse tree
-	 */
-	void exitReservedWord(ReactParser.ReservedWordContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link ReactParser#keyword}.
-	 * @param ctx the parse tree
-	 */
-	void enterKeyword(ReactParser.KeywordContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ReactParser#keyword}.
-	 * @param ctx the parse tree
-	 */
-	void exitKeyword(ReactParser.KeywordContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ReactParser#eos}.
 	 * @param ctx the parse tree

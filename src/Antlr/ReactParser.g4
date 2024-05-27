@@ -6,9 +6,7 @@ options {
 
 program : HashBangLine? sourceElements? EOF;
 
-sourceElement
-    : statement
-    ;
+sourceElement: statement;
 
 statement
     : block
@@ -17,43 +15,31 @@ statement
     | exportStatement
     | expressionStatement
     | ifStatement
-    | iterationStatement
+    | forStatement
     | returnStatement
-    | withStatement
     | labelledStatement
-    | switchStatement
     | functionDeclaration
     ;
 
 block: OpenBrace statementList? CloseBrace;
 
-statementList
-    : statement+
-    ;
+statementList: statement+ ;
 
 importStatement : Import importFromBlock ;
 
 importFromBlock
-    : ((aliasName)|( aliasName ',' moduleItems)| (moduleItems))importFrom eos
+    : ((importNamespace)|( aliasName ',' moduleItems)| (moduleItems))importFrom eos
     | StringLiteral eos
     ;
 
-moduleItems
-    : OpenBrace (aliasName ',')* (aliasName ','?)? CloseBrace
-    ;
+moduleItems: OpenBrace (aliasName ',')* (aliasName ','?)? CloseBrace;
 
 
-importNamespace
-    : ('*' | identifierName) (As identifierName)?
-    ;
+importNamespace: Identifier | (Identifier As Identifier)? |('*' As Identifier);
 
-importFrom
-    : From StringLiteral
-    ;
+importFrom : From StringLiteral ;
 
-aliasName
-    : identifierName (As identifierName)?
-    ;
+aliasName: Identifier (As Identifier)?;
 
 exportStatement
     : Export (exportFromBlock | declaration) eos # ExportDeclaration
@@ -87,20 +73,11 @@ expressionStatement
     :  expressionSequence eos
     ;
 
-ifStatement
-    : If '(' expressionSequence ')' statement (Else statement)?
-    ;
+ifStatement: If '(' expressionSequence ')' statement (Else statement)?;
 
-iterationStatement
-    : For '(' (expressionSequence | variableDeclarationList)? ';' expressionSequence? ';' expressionSequence? ')' statement # ForStatement
-    | For '(' (singleExpression | variableDeclarationList) In expressionSequence ')' statement                              # ForInStatement
-   ;
+forStatement : For '(' (expressionSequence | variableDeclarationList)? ';' expressionSequence? ';' expressionSequence? ')' statement ;
 
-varModifier
-    : Var
-    | Let
-    | Const
-    ;
+varModifier: Var| Let| Const;
 
 
 returnStatement
@@ -109,37 +86,16 @@ returnStatement
     ;
 
 
-withStatement
-    : With '(' expressionSequence ')' statement
-    ;
 
-switchStatement
-    : Switch '(' expressionSequence ')' caseBlock
-    ;
 
-caseBlock
-    : OpenBrace caseClauses? (defaultClause caseClauses?)? CloseBrace
-    ;
-
-caseClauses
-    : caseClause+
-    ;
-
-caseClause
-    : Case expressionSequence ':' statementList?
-    ;
-
-defaultClause
-    : Default ':' statementList?
-    ;
 
 labelledStatement
-    : identifier ':' statement
+    : Identifier ':' statement
     ;
 
 
 functionDeclaration
-    : Async? Function_ '*'? identifier '(' formalParameterList? ')' OpenBrace functionBody CloseBrace
+    : Async? Function_ '*'? Identifier '(' formalParameterList? ')' OpenBrace functionBody CloseBrace
     ;
 
 formalParameterList
@@ -179,32 +135,24 @@ propertyAssignment
     : propertyName ':' singleExpression                                          # PropertyExpressionAssignment
     | '[' singleExpression ']' ':' singleExpression                              # ComputedPropertyExpressionAssignment
     | Async? '*'? propertyName '(' formalParameterList? ')' OpenBrace functionBody CloseBrace # FunctionProperty
-
-    | Ellipsis? singleExpression                                                 # PropertyShorthand
     ;
 
 propertyName
-    : identifierName
+    : Identifier
     | StringLiteral
     | '[' singleExpression ']'
     ;
 
-arguments
-    : '(' (argument (',' argument)* ','?)? ')'
-    ;
+arguments : '(' (argument (',' argument)* ','?)? ')' ;
 
-argument
-    : Ellipsis? (singleExpression | identifier)
-    ;
+argument : Ellipsis? (singleExpression | Identifier) ;
 
-expressionSequence
-    : Ellipsis? singleExpression (',' Ellipsis? singleExpression)*
-    ;
+expressionSequence: Ellipsis? singleExpression (',' Ellipsis? singleExpression)*;
 
 singleExpression
     : anoymousFunction                              # FunctionExpression
     | singleExpression '[' expressionSequence ']'   # MemberIndexExpression
-    | singleExpression '?'? '.' '#'? identifierName # MemberDotExpression
+    | singleExpression '?'? '.' '#'? Identifier # MemberDotExpression
     // Split to try `new Date()` first, then `new Date`.
     | singleExpression arguments                                           # ArgumentsExpression
     | Void singleExpression                                                # VoidExpression
@@ -223,10 +171,9 @@ singleExpression
     | singleExpression '?' singleExpression ':' singleExpression           # TernaryExpression
 
     | Import '(' singleExpression ')'                                      # ImportExpression
-    | singleExpression templateStringLiteral                               # TemplateStringExpression
 
     | This                                                                 # ThisExpression
-    | identifier                                                           # IdentifierExpression
+    | Identifier                                                           # IdentifierExpression
     | literal                                                              # LiteralExpression
     | arrayLiteral                                                         # ArrayLiteralExpression
     | objectLiteral                                                        # ObjectLiteralExpression
@@ -302,7 +249,7 @@ jsxAttributeValue
     ;
 
 assignable
-    : identifier
+    : Identifier
     | arrayLiteral
     | objectLiteral
     ;
@@ -328,7 +275,7 @@ anoymousFunction
     ;
 
 arrowFunctionParameters
-    : identifier
+    : Identifier
     | '(' formalParameterList? ')'
     ;
 
@@ -341,85 +288,8 @@ literal
     : NullLiteral
     | BooleanLiteral
     | StringLiteral
-    | templateStringLiteral
     | RegularExpressionLiteral
     |DecimalLiteral
-    ;
-
-templateStringLiteral
-    : BackTick templateStringAtom* BackTick
-    ;
-
-templateStringAtom
-    : TemplateStringAtom
-    | TemplateStringStartExpression singleExpression CloseBrace
-    ;
-
-
-
-identifierName
-    : identifier
-    | reservedWord
-    ;
-
-identifier
-    : Identifier
-    | Async
-    ;
-
-reservedWord
-    : keyword
-    | NullLiteral
-    | BooleanLiteral
-    ;
-
-keyword
-    : Break
-    | Do
-    | Instanceof
-    | Typeof
-    | Case
-    | Else
-    | New
-    | Var
-    | Catch
-    | Finally
-    | Return
-    | Void
-    | Continue
-    | For
-    | Switch
-    | While
-    | Debugger
-    | Function_
-    | This
-    | With
-    | Default
-    | If
-    | Throw
-    | Delete
-    | In
-    | Try
-    | Class
-    | Enum
-    | Extends
-    | Super
-    | Const
-    | Export
-    | Import
-    | Implements
-    | Let
-    | Private
-    | Public
-    | Interface
-    | Package
-    | Protected
-    | Static
-    | Yield
-    | Async
-    | Await
-    | From
-    | As
     ;
 
 

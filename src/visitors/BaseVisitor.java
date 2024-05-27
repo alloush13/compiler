@@ -41,7 +41,47 @@ public class BaseVisitor extends ReactParserBaseVisitor{
         if (ctx.block() != null) {
             statement.setBlock(visitBlock(ctx.block()));
         }
+        if (ctx.importStatement() != null) {
+            statement.setImportStatement(visitImportStatement(ctx.importStatement()));
+        }
         return statement;
+    }
+    public importFromBlock visitBlock(ReactParser.ImportFromBlockContext ctx) {
+        importFromBlock importFromBlock=new importFromBlock();
+        if (ctx.StringLiteral() != null) {
+            importFromBlock.setStringLiteral(ctx.StringLiteral().getText());
+        }
+        if (ctx.moduleItems()!=null){
+            importFromBlock.setModuleItems(visitModuleItems(ctx.moduleItems()));
+
+        }
+        if (ctx.importFrom()!=null){
+            //importFromBlock.setImportFrom(visitImportFrom(ctx.importFrom()));
+
+        }
+        return importFromBlock;
+    }
+    public moduleItems visitModuleItems(ReactParser.ModuleItemsContext ctx) {
+        moduleItems moduleItems = new moduleItems();
+        for (int i=0;i<ctx.aliasName().size();i++){
+            if (ctx.aliasName(i)!=null){
+                //moduleItems.getAliasName().add(visitAliasName(ctx.aliasName(i)));
+
+            }
+
+        }
+        return moduleItems;
+    }
+    public aliasName visitAliasName(ReactParser.AliasNameContext ctx) {
+        aliasName aliasName = new aliasName();
+        if(ctx.Identifier(1)!=null){
+            aliasName.setIdentifier(ctx.Identifier(1).getText());
+        }
+        if(ctx.Identifier(2)!=null){
+            aliasName.setAsIdentifier(ctx.Identifier(2).getText());
+        }
+
+        return aliasName;
     }
     public block visitBlock(ReactParser.BlockContext ctx) {
         block block=new block();
@@ -50,6 +90,21 @@ public class BaseVisitor extends ReactParserBaseVisitor{
         }
         return block;
     }
+    public importStatement visitImportStatement(ReactParser.ImportStatementContext ctx) {
+        importStatement importStatement=new importStatement();
+        if (ctx.importFromBlock() != null) {
+            importStatement.setImportFromBlock(visitImportFromBlock(ctx.importFromBlock()));
+        }
+        return importStatement;
+    }
+    public importFromBlock visitImportFromBlock(ReactParser.ImportFromBlockContext ctx) {
+        importFromBlock importFromBlock=new importFromBlock();
+        if (ctx.StringLiteral() != null) {
+            importFromBlock.setStringLiteral(ctx.StringLiteral().getText());
+        }
+        return importFromBlock;
+    }
+
     public statementList visitStatementList(ReactParser.StatementListContext ctx) {
         statementList statementList = new statementList();
         if (ctx.statement() != null) {

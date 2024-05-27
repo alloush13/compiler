@@ -59,12 +59,6 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitModuleItems(ReactParser.ModuleItemsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link ReactParser#importDefault}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitImportDefault(ReactParser.ImportDefaultContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link ReactParser#importNamespace}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -170,36 +164,6 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWithStatement(ReactParser.WithStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#switchStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSwitchStatement(ReactParser.SwitchStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#caseBlock}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCaseBlock(ReactParser.CaseBlockContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#caseClauses}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCaseClauses(ReactParser.CaseClausesContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#caseClause}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCaseClause(ReactParser.CaseClauseContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#defaultClause}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDefaultClause(ReactParser.DefaultClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#labelledStatement}.
 	 * @param ctx the parse tree
@@ -645,30 +609,6 @@ public interface ReactParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTemplateStringAtom(ReactParser.TemplateStringAtomContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#identifierName}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdentifierName(ReactParser.IdentifierNameContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#identifier}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdentifier(ReactParser.IdentifierContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#reservedWord}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitReservedWord(ReactParser.ReservedWordContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link ReactParser#keyword}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitKeyword(ReactParser.KeywordContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link ReactParser#eos}.
 	 * @param ctx the parse tree
